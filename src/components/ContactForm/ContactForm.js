@@ -7,21 +7,32 @@ class ContactForm extends Component {
         number: '',
     };
     
+    
+
     handleNameChange = evt => {
-        this.setState({ name: evt.currentTarget.value });
+        const { name, value} = evt.target
+        this.setState({
+            [name]: value
+        });
     }
+
+
+
     handleSubmit = evt => {
         evt.preventDefault();
+
+        const {name, number} = this.state
         const newContact = {
             id: nanoid(),
-            name: evt.currentTarget.elements.name.value,
-            number: evt.currentTarget.elements.number.value
+            name,
+            number
         };
-        console.log(newContact);
-        this.props.addContact(newContact); // Викликати функцію з пропсами для додавання контакту
-        this.setState({ name: '', number: '' });
+        
+        this.props.addContact(newContact);
         evt.currentTarget.reset();
+        
     };
+
 
     
     render() {
@@ -45,12 +56,14 @@ class ContactForm extends Component {
                     <input
                         type="tel"
                         name="number"
+                        value={this.state.number}
+                        onChange={this.handleNameChange}
                         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                         required
                     />
                 </label>
-                <button type="submit">Add contact</button>
+                <button type="submit" >Add contact</button>
             </form>
         </>
     );

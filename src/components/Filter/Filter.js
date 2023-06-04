@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 class Filter extends Component {
     render() {
         const { value, onChange } = this.props;
-        
+        // console.log(value);
+        // console.log(onChange)
 
         return (
             <>
