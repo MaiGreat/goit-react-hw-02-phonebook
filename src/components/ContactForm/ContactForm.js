@@ -7,16 +7,12 @@ class ContactForm extends Component {
         number: '',
     };
     
-    
-
     handleNameChange = evt => {
         const { name, value} = evt.target
         this.setState({
             [name]: value
         });
     }
-
-
 
     handleSubmit = evt => {
         evt.preventDefault();
@@ -70,8 +66,6 @@ class ContactForm extends Component {
         </>
     );
     }
-    
-
 }
 
 export default ContactForm;

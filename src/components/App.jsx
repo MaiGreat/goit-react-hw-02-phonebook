@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import ContactForm from './ContactForm/ContactForm'
+import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
+import ContactList from './ContactList/ContactList';
+
 
 
 class App extends Component {
@@ -18,17 +20,17 @@ class App extends Component {
     this.setState({ filter: event.currentTarget.value });
   };
 
-addContact = newContact => {
+  addContact = newContact => {
+    if (this.state.contacts.find(contact => contact.name === newContact.name)) {
+            return alert(`${this.state.name} is already in contacts!`);
+        }
   this.setState(prevState => ({
     contacts: [...prevState.contacts, newContact]
   }));
 }
   
   render() {
-    const filteredContacts = this.state.contacts.filter(
-      contact => contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
-    );
-
+    
     return (
     <>
       <div>
@@ -40,16 +42,15 @@ addContact = newContact => {
           />
         <h2>Contact</h2>
           <Filter
-            filter={this.state.filter}
             onChange={this.filterContacts}
             
           />
+          <ContactList
+            contacts={this.state.contacts}
+            filter={this.state.filter}
+          />
       </div>
-          <ul>
-            {filteredContacts.map(contact => (
-              <li key={contact.id}>{contact.name} - {contact.number}</li>
-            ))}
-      </ul>
+          
     </>
     );
     }
