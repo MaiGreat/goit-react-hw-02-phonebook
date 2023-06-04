@@ -27,9 +27,11 @@ class ContactForm extends Component {
             name,
             number
         };
-        
         this.props.addContact(newContact);
-        evt.currentTarget.reset();
+        this.setState({
+            name: '',
+            number: ''
+        });
         
     };
 
