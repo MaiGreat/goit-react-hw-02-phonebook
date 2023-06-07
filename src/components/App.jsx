@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
+import css from './ContactForm/ContactForm.module.css'
 
 
 
@@ -21,26 +22,30 @@ class App extends Component {
   };
 
   addContact = newContact => {
-    if (this.state.contacts.find(contact => contact.name === newContact.name)) {
+    if (this.state.contacts.find(contact => contact.name.toLowerCase() === newContact.name.toLowerCase())) {
             return alert(`${this.state.name} is already in contacts!`);
         }
   this.setState(prevState => ({
     contacts: [...prevState.contacts, newContact]
   }));
-}
+  }
+  
+  handleDeleteClick = contactId => {
+  this.setState(prevState => ({
+    contacts: prevState.contacts.filter(contact => contact.id !== contactId)
+  }));
+  };
   
   render() {
     
     return (
     <>
-      <div>
-        <h2>Phonebook</h2>
+        <div className={css.container}>
+        <h2 className={css.title}>Phonebook</h2>
           <ContactForm
-            contacts={this.state.contacts}
-            value={this.state.value}
             addContact={this.addContact}
           />
-        <h2>Contact</h2>
+        <h2 className={css.title}>Contact</h2>
           <Filter
             onChange={this.filterContacts}
             
@@ -48,6 +53,7 @@ class App extends Component {
           <ContactList
             contacts={this.state.contacts}
             filter={this.state.filter}
+            onClick={this.handleDeleteClick}
           />
       </div>
           
