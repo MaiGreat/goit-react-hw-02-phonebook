@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 import css from "./ContactList.module.css"
 
-const ContactList = ({ contacts, filter, onClick }) => {
-    const filteredContacts = contacts.filter(
-        contact => contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-
+const ContactList = ({ contacts, onClick }) => {
 
     return (
         <ul className={css.list}>
