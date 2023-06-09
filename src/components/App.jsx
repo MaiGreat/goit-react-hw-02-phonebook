@@ -57,8 +57,7 @@ class App extends Component {
             
           />
           <ContactList
-            contacts={this.state.contacts}
-            filter={filter}
+            contacts={filteredContacts}
             onClick={this.handleDeleteClick}
           />
       </div>
